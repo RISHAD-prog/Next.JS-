@@ -1,14 +1,19 @@
+'use client'
+import { useParams, useSearchParams } from 'next/navigation';
 import React from 'react';
 export const metadata = {
     title: 'Blogs | Next Hero',
     description: 'the next js app',
 }
-const Blogs = ({ params }) => {
+const Blogs = ({ params, searchParams }) => {
     console.log(params.segment);
-    const year = params.segment[0];
+    const [year, id] = params.segment || [];
+    const params2 = useParams();
+    const searchParams2 = useSearchParams();
+    console.log(params2.segment.split('/'), searchParams2.get("title"));
     return (
         <div>
-            Blogs id for year {year} for studentId:{params.segment[1]}
+            Blogs id for year {year || new Date().getFullYear()} for studentId:{id}
         </div>
     );
 };
